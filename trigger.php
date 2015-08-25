@@ -5,6 +5,11 @@
     $token = $_REQUEST['jenkins_token'];
     $job_name = $_REQUEST['job_name'];
 
+    if ($job_name == '' || $token == '') {
+        echo 'Job or token not specified, use job_name= and jenkins_token= in the URL path.' . "\n";
+        return;
+    }
+
     // if 'text' param contains any variables separated by spaces, append to url
     $varArr = explode(" ", $text);
 
