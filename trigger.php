@@ -1,6 +1,8 @@
 <?php
     
     $config = require('config.php');
+    $auth_token = $config['jenkins_auth_token'];
+
     $text = $_REQUEST['text'];
     $token = $_REQUEST['jenkins_token'];
     $job_name = $_REQUEST['job_name'];
