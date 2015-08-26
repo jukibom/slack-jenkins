@@ -1,13 +1,14 @@
 <?php
     
     $config = require('config.php');
+    $url = $config['jenkins_url'];
     $auth_token = $config['jenkins_auth_token'];
 
     $text = $_REQUEST['text'];
-    $token = $_REQUEST['jenkins_token'];
+    $job_token = $_REQUEST['jenkins_token'];
     $job_name = $_REQUEST['job_name'];
 
-    if ($job_name == '' || $token == '') {
+    if ($job_name == '' || $job_token == '') {
         echo 'Job or token not specified, use job_name= and jenkins_token= in the URL path.' . "\n";
         return;
     }
@@ -15,11 +16,14 @@
     // if 'text' param contains any variables separated by spaces, append to url
     $varArr = explode(" ", $text);
 
-    $params = '?token=' . $token;
+    $params = '?token=' . $job_token;
     foreach ($varArr as $var) {
+        echo $var . "\n";
         $params .= '&' . $var;
     }
 
-    file_get_contents($config['jenkins_url'] . '/job/' . $job_name . '/buildWithParameters' . $params,0);
+    $options = array();
+
+    file_get_contents($url . '/job/' . $job_name . '/buildWithParameters' . $params, false, $options);
 
 ?>
