@@ -13,6 +13,8 @@
         return;
     }
 
+    echo 'Recieved build request for ' . $job_name + "\n";
+
     // if 'text' param contains any variables separated by spaces, append to url
     $varArr = explode(" ", $text);
 
@@ -23,7 +25,18 @@
     }
 
     $options = array();
+    if ($auth_token) {
+        echo 'Using Auth Token' . "\n";
+        // build auth header
+        $options = array('http' => 
+            array(
+                'method' => 'GET',
+                'header' => 'Authorization: Bearer ' . $auth_token
+            )
+        );
+    }
 
-    file_get_contents($url . '/job/' . $job_name . '/buildWithParameters' . $params, false, $options);
-
+    $context = stream_context_create($options);
+    $response = file_get_contents($url . '/job/' . $job_name . '/buildWithParameters' . $params, false, $context);
+    echo $response + "\n";
 ?>
