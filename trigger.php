@@ -26,6 +26,9 @@
         $params .= '&' . $var;
     }
 
+    $headers = array();
+    $headers['method'] = 'GET';
+
     // if basic auth, insert into url
     if ($auth_user && $auth_pass) {
         $auth_str = $auth_user . ":" . $auth_pass . "@";
@@ -33,18 +36,14 @@
         echo 'Using HTTP auth: ' . $auth_user . ":" . $auth_pass . "\n";
     }
 
-    $options = array();
+    
     if ($auth_token) {
         echo 'Using Auth Token' . "\n";
         // build auth header
-        $options = array('http' => 
-            array(
-                'method' => 'GET',
-                'header' => 'Authorization: Bearer ' . $auth_token
-            )
-        );
+        $headers['header'] .= 'Authorization: Bearer ' . $auth_token . "\r\n";
     }
 
+    $options = array('http' => $headers);
     $context = stream_context_create($options);
     $response = file_get_contents($url . '/job/' . $job_name . '/buildWithParameters' . $params, false, $context);
     echo $response . "\n";
