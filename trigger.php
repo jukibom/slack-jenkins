@@ -31,9 +31,10 @@
 
     // if basic auth, insert into url
     if ($auth_user && $auth_pass) {
-        $auth_str = $auth_user . ":" . $auth_pass . "@";
-        $url = substr_replace($url, $auth_str, 7, 0);
-        echo 'Using HTTP auth: ' . $auth_user . ":" . $auth_pass . "\n";
+        $headers['header'] = 'Authorization: Basic ' . base64_encode("$auth_user:$auth_pass") . "\r\n";
+        // $auth_str = $auth_user . ":" . $auth_pass . "@";
+        // $url = substr_replace($url, $auth_str, 7, 0);
+        echo 'Using HTTP Auth' . "\n";
     }
 
     
