@@ -2,4 +2,6 @@
 return array(
         'jenkins_url' => 'http://jenkins.example.com'
         'jenkins_auth_token' => ''  // set this to use oath token (github, google apps etc)
+        'jenkins_basic_auth_username' => '',  // set this to use HTTP basic auth
+        'jenkins_basic_auth_password' => ''   // set this to use HTTP basic auth
 );

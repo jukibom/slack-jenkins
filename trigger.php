@@ -3,6 +3,8 @@
     $config = require('config.php');
     $url = $config['jenkins_url'];
     $auth_token = $config['jenkins_auth_token'];
+    $auth_user  = $config['jenkins_basic_auth_username'];
+    $auth_pass  = $config['jenkins_basic_auth_password'];
 
     $text = $_REQUEST['text'];
     $job_token = $_REQUEST['jenkins_token'];
@@ -22,6 +24,10 @@
     foreach ($varArr as $var) {
         echo $var . "\n";
         $params .= '&' . $var;
+    }
+
+    if ($auth_user && $auth_pass) {
+        $url = $auth_user . ":" . $auth_pass . "@" . $url;
     }
 
     $options = array();
