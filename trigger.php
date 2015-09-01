@@ -32,9 +32,7 @@
     // if basic auth, insert into url
     if ($auth_user && $auth_pass) {
         $headers['header'] = 'Authorization: Basic ' . base64_encode("$auth_user:$auth_pass") . "\r\n";
-        // $auth_str = $auth_user . ":" . $auth_pass . "@";
-        // $url = substr_replace($url, $auth_str, 7, 0);
-        echo 'Using HTTP Auth' . "\n";
+        echo 'Using HTTP Auth user: ' . $auth_user . "\n";
     }
 
     
@@ -47,5 +45,5 @@
     $options = array('http' => $headers);
     $context = stream_context_create($options);
     $response = file_get_contents($url . '/job/' . $job_name . '/buildWithParameters' . $params, false, $context);
-    echo $response . "\n";
+    echo 'Build requested.' . "\n";
 ?>
