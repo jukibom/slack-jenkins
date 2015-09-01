@@ -15,7 +15,7 @@
         return;
     }
 
-    echo 'Recieved build request for ' . $job_name + "\n";
+    echo 'Recieved build request for ' . $job_name . "\n";
 
     // if 'text' param contains any variables separated by spaces, append to url
     $varArr = explode(" ", $text);
@@ -30,6 +30,7 @@
     if ($auth_user && $auth_pass) {
         $auth_str = $auth_user . ":" . $auth_pass . "@";
         $url = substr_replace($url, $auth_str, 7, 0);
+        echo 'Using HTTP auth: ' . $auth_user . ":" . $auth_pass . "\n";
     }
 
     $options = array();
@@ -46,5 +47,5 @@
 
     $context = stream_context_create($options);
     $response = file_get_contents($url . '/job/' . $job_name . '/buildWithParameters' . $params, false, $context);
-    echo $response + "\n";
+    echo $response . "\n";
 ?>
