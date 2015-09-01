@@ -26,8 +26,10 @@
         $params .= '&' . $var;
     }
 
+    // if basic auth, insert into url
     if ($auth_user && $auth_pass) {
-        $url = $auth_user . ":" . $auth_pass . "@" . $url;
+        $auth_str = $auth_user . ":" . $auth_pass . "@";
+        $url = substr_replace($url, $auth_str, 7, 0);
     }
 
     $options = array();
