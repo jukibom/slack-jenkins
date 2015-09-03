@@ -1,10 +1,9 @@
 <?php
     
-    $config = require('config.php');
-    $url = $config['jenkins_url'];
-    $auth_token = $config['jenkins_auth_token'];
-    $auth_user  = $config['jenkins_basic_auth_username'];
-    $auth_pass  = $config['jenkins_basic_auth_password'];
+    $url = getenv('JENKINS_URL')
+    $auth_token = getenv('JENKINS_AUTH_TOKEN')
+    $auth_user  = getenv('JENKINS_AUTH_BASIC_USERNAME')
+    $auth_pass  = getenv('JENKINS_AUTH_BASIC_PASSWORD')
 
     $text = $_REQUEST['text'];
     $job_token = $_REQUEST['jenkins_token'];
