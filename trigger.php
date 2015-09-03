@@ -1,9 +1,9 @@
 <?php
     
-    $url = getenv('JENKINS_URL')
-    $auth_token = getenv('JENKINS_AUTH_TOKEN')
-    $auth_user  = getenv('JENKINS_AUTH_BASIC_USERNAME')
-    $auth_pass  = getenv('JENKINS_AUTH_BASIC_PASSWORD')
+    $url = getenv('JENKINS_URL');
+    $auth_token = getenv('JENKINS_AUTH_TOKEN');
+    $auth_user  = getenv('JENKINS_AUTH_BASIC_USERNAME');
+    $auth_pass  = getenv('JENKINS_AUTH_BASIC_PASSWORD');
 
     $text = $_REQUEST['text'];
     $job_token = $_REQUEST['jenkins_token'];
